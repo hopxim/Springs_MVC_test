@@ -18,5 +18,5 @@ public interface BookDao {
     @Select("select * from tbl_book where id=#{id}")
     public Book getById(Integer id);
     @Select("select * from tbl_book ")
-    public List<BookDao> getAll();
+    public List<Book> getAll();
 }

@@ -1,10 +1,12 @@
 package com.maxi.service;
 
-import com.maxi.dao.BookDao;
 import com.maxi.domain.Book;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+
+@Transactional
 public interface BooService {
    /*
     *保存
@@ -34,5 +36,5 @@ public interface BooService {
      *查询全部
      * @return
      */
-    public List<BookDao> getAll();
+    public List<Book> getAll();
 }

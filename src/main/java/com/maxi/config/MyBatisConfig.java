@@ -11,6 +11,7 @@ public class MyBatisConfig {
     @Bean
     public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource){
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+        factoryBean.setDataSource(dataSource);
         factoryBean.setTypeAliasesPackage("com.maxi.domain");
         return factoryBean;
     }
@@ -21,3 +22,4 @@ public class MyBatisConfig {
         return msc;
     }
 }
+

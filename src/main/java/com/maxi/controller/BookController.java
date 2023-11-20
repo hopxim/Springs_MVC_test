@@ -15,31 +15,41 @@ public class BookController {
     @Autowired
     private BooService booService;
     @PostMapping
-    public boolean save(@RequestBody Book book) {
-        booService.save(book);
-        return true;
+    public Result save(@RequestBody Book book) {
+       boolean flag=booService.save(book);
+        return new Result(flag?Code.SAVE_OK:Code.SAVE_ERR,flag);
     }
 
     @PutMapping
-    public boolean update(@RequestBody Book book) {
-        booService.update(book);
-        return true;
+    public Result update(@RequestBody Book book) {
+       boolean flag= booService.update(book);
+        return new Result(flag?Code.UPDATE_OK:Code.UPDATE_ERR,flag);
+
     }
 
     @DeleteMapping({"/{id}"})
-    public boolean delete(@PathVariable Integer id) {
-        booService.delete(id);
-        return true;
+    public Result delete(@PathVariable Integer id) {
+        boolean flag= booService.delete(id);
+        return  new Result(flag?Code.DELETE_OK:Code.DELETE_ERR,flag);
     }
 
     @GetMapping({"/{id}"})
-    public Book getById(@PathVariable Integer id) {
-        return booService.getById(id);
+    public Result getById(@PathVariable Integer id) {
+
+
+        Book book=booService.getById(id);
+        Integer code=book!=null ? Code.GET_OK:Code.GET_ERR;
+        String msg=book!=null?"":"数据查询失败，请重试";
+        return new Result(code,book,msg);
     }
 
     @GetMapping
-    public List<BookDao> getAll() {
-        return booService.getAll();
+    public Result getAll() {
+        List<Book> books=booService.getAll();
+        Integer code=books!=null ? Code.GET_OK:Code.GET_ERR;
+        String msg=books!=null?"":"数据查询失败，请重试";
+
+        return new Result(code,books,msg);
     }
 
 

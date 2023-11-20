@@ -9,14 +9,14 @@ import org.springframework.transaction.PlatformTransactionManager;
 import javax.sql.DataSource;
 
 public class JdbcConfig {
-    @Value("${jdbc.river}")
-    String driver;
+    @Value("${jdbc.driver}")
+    private String driver;
     @Value("${jdbc.url}")
-    String url;
+    private String url;
     @Value("${jdbc.username}")
-    String username;
+    private String username;
     @Value("${jdbc.password}")
-    String password;
+    private String password;
 
     @Bean
     public DataSource dataSource() {
@@ -28,6 +28,10 @@ public class JdbcConfig {
         return dataSource;
     }
 
+    /*
+    * PlatformTransactionManager (平台事务管理器)
+    * PlatformTransactionManager接口是 spring 的事务管理器,它里面提供了我们常用的操作事务的方法
+    */
     @Bean
     public PlatformTransactionManager platformTransactionManager(DataSource dataSource){
         DataSourceTransactionManager ds = new DataSourceTransactionManager();
